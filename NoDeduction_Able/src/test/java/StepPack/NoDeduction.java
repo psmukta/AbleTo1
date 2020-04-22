@@ -1,5 +1,6 @@
 package StepPack;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -18,10 +19,14 @@ import cucumber.api.java.en.When;
 public class NoDeduction extends AbstractClass {
 
 	@Given("^I am an Admin$")
-	public void i_am_an_Admin() {
+	public void i_am_an_Admin() throws IOException {
+		PropertyValues pr = new PropertyValues();
 		driver.get("file:///C:/Users/tanvi/Desktop/AbleTo/app/login.html");
-		driver.findElement(By.xpath(".//*[@name='form-username']")).sendKeys("admin123");
-		driver.findElement(By.xpath(".//*[@name='form-password']")).sendKeys("foobar123");
+		String username = pr.getUser();
+		String password = pr.getPassword();
+		System.out.println("usr/pass: "+username+"::"+password);
+		driver.findElement(By.xpath(".//*[@name='form-username']")).sendKeys(username);
+		driver.findElement(By.xpath(".//*[@name='form-password']")).sendKeys(password);
 		driver.findElement(By.id("btnLogin")).submit();
 
 	}
